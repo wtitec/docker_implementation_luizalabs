@@ -36,6 +36,15 @@ Execute o comando a seguir:
 docker exec -it LuizaLabs sh -c "cd /opt/api_communication_luizalabs && npm run test"
 ```
 
+## Documentação pelo Swagger UI
+Link abaixo:
+
+```sh
+http://localhost:3000/api-docs
+```
+- Login Email: wtitec@swagger
+- Login Senha: 123456
+
 ## License
 
 MIT
