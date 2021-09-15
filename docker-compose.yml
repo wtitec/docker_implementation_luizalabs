@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  nodejs:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    container_name: LuizaLabs
+    command: >
+      bash -c "cd /opt/api_communication_luizalabs; npm run start"
+    ports:
+      - 3000:3000
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+    tty: true
+    stdin_open: true
+
+  db:
+    image: mysql:8
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+        - MYSQL_ROOT_PASSWORD=758ffee1
+        - MYSQL_DATABASE=heroku_c9dfa0776bb7e16
+        - MYSQL_USER=b7f638b6fb5397
+        - MYSQL_PASSWORD=758ffee1
+    ports:
+      - "3306:3306"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+    tty: true
+    stdin_open: true
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
